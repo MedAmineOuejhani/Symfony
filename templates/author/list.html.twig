@@ -1,0 +1,35 @@
+  {% set number=0 %}
+  {% set books=0 %}
+
+
+{% if authorslist is empty %}
+<p>List empty </P>
+
+{%else%}
+<table>
+ <tr>
+  <td>ID</td>
+  <td>Picture</td>
+  <td>Username</td>
+  <td>Email</td>
+  <td>Number of books</td>
+  </tr>
+
+  {% for authors in authorslist%}
+    <tr>
+        <td> {{authors.id}}  <a href="{{ path('authorDetails',{'id': authors.id }) }}">{{'Details' }}</a></td> 
+        <td>  <img src="{{authors.picture}}"> </td>
+        <td> {{authors.username|upper}}</td>
+        <td> {{authors.email}}</td>
+        <td> {{authors.nb_books}}</td>
+        </tr>
+     {% set number= number+1 %}
+     {% set books= books+authors.nb_books %}
+
+    {%endfor%}
+
+
+    </table>
+    {%endif%}
+    <p> total of authors :  {{number}} </p>
+    <p> total of books :  {{books}} </p>
